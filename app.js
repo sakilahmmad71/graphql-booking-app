@@ -1,67 +1,39 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
+
 import { graphqlHTTP } from 'express-graphql'
-import { buildSchema } from 'graphql'
+
+import graphQlSchemas from './graphql/schema/index'
+import graphQlResolvers from './graphql/resolvers/index'
 
 const app = express()
 
 app.use(bodyParser.json())
 
-const events = []
-
-// GraphQL setup
 app.use(
     '/graphql',
     graphqlHTTP({
-        schema: buildSchema(`
-            type Event {
-                _id : ID!
-                title : String!
-                description : String!
-                price : Float!
-                date : String!
-            }
-
-            input EventInput {
-                title : String!
-                description : String!
-                price : Float!
-                date : String!
-            }
-
-            type rootQuery {
-                events : [Event!]!
-            }
-
-            type rootMutation {
-                createEvent (eventInput : EventInput) : Event
-            }
-
-            schema {
-                query : rootQuery,
-                mutation : rootMutation
-            }
-    `),
-        rootValue: {
-            events: () => {
-                return events
-            },
-            createEvent: (args) => {
-                const event = {
-                    _id: Math.random().toString(),
-                    title: args.eventInput.title,
-                    description: args.eventInput.description,
-                    price: +args.eventInput.price,
-                    date: args.eventInput.date,
-                }
-                events.push(event)
-                return event
-            },
-        },
+        schema: graphQlSchemas,
+        rootValue: graphQlResolvers,
         graphiql: true,
     })
 )
 
-app.listen(3000, () => {
-    console.log('App running on port 3000 ...')
-})
+const mongoDB = {
+    mongoUrl: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@booking.lt27u.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
+    warnings: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    },
+}
+
+mongoose
+    .connect(mongoDB.mongoUrl, mongoDB.warnings)
+    .then(() => {
+        console.log('MongoDB Connected successfully...')
+        app.listen(3000, () => {
+            console.log('App running on port 3000 ...')
+        })
+    })
+    .catch((error) => console.log(error))
