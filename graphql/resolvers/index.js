@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'
 
 import Event from '../../models/Event'
 import User from '../../models/User'
+import Booking from '../../models/Booking'
 
 const events = async (eventId) => {
     try {
@@ -41,6 +42,7 @@ const graphQlResolvers = {
             throw error
         }
     },
+
     users: async () => {
         try {
             const users = await User.find()
@@ -52,16 +54,29 @@ const graphQlResolvers = {
             throw error
         }
     },
+
+    bookings: async () => {
+        try {
+            const bookings = await Booking.find()
+            return bookings.map((booking) => ({
+                ...booking._doc,
+                createdAt: new Date(booking._doc.createdAt).toISOString(),
+                updatedAt: new Date(booking._doc.updatedAt).toISOString(),
+            }))
+        } catch (error) {
+            throw error
+        }
+    },
+
     createEvent: async (args) => {
         const event = new Event({
             title: args.eventInput.title,
             description: args.eventInput.description,
             price: +args.eventInput.price,
             date: new Date(args.eventInput.date),
-            creator: '5f47e34de24bcf2f785b2f4c',
+            creator: '5f4938a51b9d4a17d0896e85',
         })
         let createdEvent
-
         try {
             const result = await event.save()
             createdEvent = {
@@ -69,7 +84,7 @@ const graphQlResolvers = {
                 date: new Date(event._doc.date).toISOString(),
                 creator: user.bind(this, result._doc.creator),
             }
-            const creator = await User.findById('5f47e34de24bcf2f785b2f4c')
+            const creator = await User.findById('5f4938a51b9d4a17d0896e85')
             if (!creator) {
                 throw new Error('User not found.')
             }
@@ -80,6 +95,7 @@ const graphQlResolvers = {
             throw error
         }
     },
+
     createUser: async (args) => {
         try {
             const user = await User.findOne({ email: args.userInput.email })
@@ -91,9 +107,26 @@ const graphQlResolvers = {
                 email: args.userInput.email,
                 password: hashedPass,
             })
-
             const result = await hashedUser.save()
             return { ...result._doc }
+        } catch (error) {
+            throw error
+        }
+    },
+
+    createBooking: async (args) => {
+        try {
+            const fetchedEvent = await Event.findOne({ _id: args.eventId })
+            const booking = new Booking({
+                user: '5f4938a51b9d4a17d0896e85',
+                event: fetchedEvent,
+            })
+            const result = await booking.save()
+            return {
+                ...result._doc,
+                createdAt: new Date(result._doc.createdAt).toISOString(),
+                updatedAt: new Date(result._doc.updatedAt).toISOString(),
+            }
         } catch (error) {
             throw error
         }

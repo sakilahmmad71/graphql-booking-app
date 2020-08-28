@@ -1,6 +1,14 @@
 import { buildSchema } from 'graphql'
 
 export default buildSchema(`
+            type Booking {
+                _id : ID!
+                event : Event!
+                user : User!
+                createdAt : String!
+                updatedAt : String!
+            }
+
             type User {
                 _id : ID!
                 email : String!
@@ -32,11 +40,14 @@ export default buildSchema(`
             type rootQuery {
                 events : [Event!]!
                 users : [User!]!
+                bookings : [Booking!]!
             }
 
             type rootMutation {
                 createEvent (eventInput : EventInput) : Event
                 createUser (userInput : UserInput) : User
+                createBooking (eventId : ID!) : Booking!
+                cancelBooking (bookingId : ID!) : Event!
             }
 
             schema {
