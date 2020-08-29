@@ -6,10 +6,13 @@ import { graphqlHTTP } from 'express-graphql'
 
 import graphQlSchemas from './graphql/schema/index'
 import graphQlResolvers from './graphql/resolvers/index'
+import { isAuthenticate } from './middleware/is-auth'
 
 const app = express()
 
 app.use(bodyParser.json())
+
+app.use(isAuthenticate)
 
 app.use(
     '/graphql',
