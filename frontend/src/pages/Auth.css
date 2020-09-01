@@ -1,0 +1,52 @@
+.container .form__container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.form__email {
+    width: 100%;
+}
+
+.form__email input {
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    background: whitesmoke;
+    padding: 1rem 0;
+    font-size: 18px;
+}
+
+.form__password {
+    width: 100%;
+}
+
+.form__password input {
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    background: whitesmoke;
+    padding: 1rem 0;
+    font-size: 20px;
+}
+
+.form__button button {
+    margin-top: 3rem;
+    display: inline-block;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    font-size: 20px;
+    background: lightskyblue;
+    cursor: pointer;
+}
+
+.singup__button button {
+    margin-top: 15px;
+    display: inline-block;
+    width: 100%;
+    border: none;
+    padding: 1rem;
+    font-size: 18px;
+    background: mediumspringgreen;
+    cursor: pointer;
+}
