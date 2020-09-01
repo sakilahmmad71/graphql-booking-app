@@ -1,0 +1,44 @@
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: lightskyblue;
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    text-align: center;
+}
+
+.nav__logo {
+    flex: 0.5;
+}
+
+.nav__logo h1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.nav__item {
+    flex: 0.5;
+}
+
+.nav__item ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav__item ul li {
+    margin-left: 0.5rem;
+}
+
+.nav__item ul li a {
+    text-decoration: none;
+}
+
+.nav__item ul li a:hover,
+.nav__item ul li a:active,
+.nav__item ul li a.active {
+    color: lightslategray;
+}
