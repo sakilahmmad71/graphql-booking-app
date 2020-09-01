@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
+import cors from 'cors'
 
 import { graphqlHTTP } from 'express-graphql'
 
@@ -10,7 +11,20 @@ import { isAuthenticate } from './middleware/is-auth'
 
 const app = express()
 
+app.use(cors())
+
 app.use(bodyParser.json())
+
+// // CORS policies
+// app.use((req, res, next) => {
+//     req.setHeader('Access=Control-Allow-Origin', '*')
+//     req.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+//     req.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+//     if (req.method === 'OPTIONS') {
+//         return res.sendStatus(200)
+//     }
+//     next()
+// })
 
 app.use(isAuthenticate)
 
@@ -35,7 +49,7 @@ mongoose
     .connect(mongoDB.mongoUrl, mongoDB.warnings)
     .then(() => {
         console.log('MongoDB Connected successfully...')
-        app.listen(3000, () => {
+        app.listen(8000, () => {
             console.log('App running on port 3000 ...')
         })
     })
