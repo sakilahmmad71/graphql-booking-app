@@ -1,0 +1,19 @@
+.booking__detail {
+    width: 70%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.booking__detail h3 {
+    color: blue;
+}
+
+.booking__detail p {
+    color: gray;
+}
