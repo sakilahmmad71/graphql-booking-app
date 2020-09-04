@@ -1,0 +1,22 @@
+.showevents__lists {
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    background: whitesmoke;
+}
+
+.showevents__card {
+    border-bottom: 1px solid blue;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.showevents__card h2 {
+    color: blue;
+}
+
+.showevents__info {
+    padding-top: 25px;
+}

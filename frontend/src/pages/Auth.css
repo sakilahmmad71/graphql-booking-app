@@ -8,11 +8,12 @@
 }
 
 .form__email input {
-    width: 100%;
+    width: 98%;
     margin-top: 10px;
     border: none;
     background: whitesmoke;
     padding: 1rem 0;
+    padding-left: 14px;
     font-size: 18px;
 }
 
@@ -21,12 +22,13 @@
 }
 
 .form__password input {
-    width: 100%;
+    width: 98%;
     margin-top: 10px;
     border: none;
     background: whitesmoke;
     padding: 1rem 0;
-    font-size: 20px;
+    padding-left: 14px;
+    font-size: 18px;
 }
 
 .form__button button {
@@ -36,7 +38,8 @@
     padding: 1rem;
     border: none;
     font-size: 20px;
-    background: lightskyblue;
+    color: white;
+    background: blue;
     cursor: pointer;
 }
 
@@ -47,6 +50,6 @@
     border: none;
     padding: 1rem;
     font-size: 18px;
-    background: mediumspringgreen;
+    background: whitesmoke;
     cursor: pointer;
 }

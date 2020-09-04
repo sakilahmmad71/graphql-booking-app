@@ -1,0 +1,53 @@
+.event {
+    width: 30rem;
+    border: 1px solid blue;
+    padding: 1rem;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.event button {
+    padding: 8px;
+    border: none;
+    color: white;
+    background: blue;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.event button:hover {
+    background: white;
+    color: black;
+    border: 1px solid blue;
+}
+
+.form {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.form-control {
+    margin-top: 10px;
+}
+
+.form-control label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control input,
+.form-control textarea {
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.showevents ul {
+    list-style: none;
+}

@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './Auth.css'
-
-import authContext from '../context/authContext'
+import { authContext } from '../App'
+import { login } from '../context/authReducer.js'
 
 const Auth = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isSignup, setIsSignup] = useState(false)
 
-    const contextType = authContext
-
-    console.log(contextType)
+    const { authDispatch } = useContext(authContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -53,12 +51,20 @@ const Auth = () => {
             .then((res) => {
                 if (res.status !== 200 && res.status !== 201) {
                     throw new Error('Failed')
-                    // console.log(res)
                 }
                 return res.json()
             })
-            .then((data) => {
-                console.log(data)
+            .then((resData) => {
+                if (resData.data.createUser) {
+                    return
+                } else if (resData.data.login.token) {
+                    const {
+                        token,
+                        userId,
+                        tokenExpiration,
+                    } = resData.data.login
+                    authDispatch(login(token, userId, tokenExpiration))
+                }
             })
             .catch((error) => {
                 throw error
