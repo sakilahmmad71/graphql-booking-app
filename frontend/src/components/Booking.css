@@ -17,3 +17,19 @@
 .booking__detail p {
     color: gray;
 }
+
+.btn {
+    padding: 8px;
+    border: none;
+    color: white;
+    background: blue;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.btn:hover {
+    background: white;
+    color: black;
+    border: 1px solid blue;
+}

@@ -113,9 +113,7 @@ const Events = () => {
                 }
                 return res.json()
             })
-            .then((resData) => {
-                console.log(resData)
-            })
+            .then((resData) => {})
             .catch((error) => {
                 throw error
             })
